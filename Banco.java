@@ -6,16 +6,17 @@ import CalculadoraV2.Suma;
 
 public class Banco {
 
-	boolean continuar;
+	boolean continuar, acceso;
 	int opcion, intentos;
 	double saldo;
 	String usuario, pass;
 	
 	public Banco() {
 		
+		acceso = false;
 		continuar = true;
 		opcion = 0;
-		saldo = 2000;
+		//saldo = 2000;
 		usuario = " ";
 		pass = " ";
 		intentos = 3;
@@ -33,9 +34,16 @@ public class Banco {
 			System.out.println("Ingresa tu contraseña: ");
 			pass = leer.next();
 		
+			Login instanciaLogin = new Login();
+			
+			acceso = instanciaLogin.acceso(usuario, pass);
+			
 			//sí ambos son correctos lo mandamos al menú
-			if(usuario.equals("Pedro") && pass.equals("123")) 
+			if(acceso) {
+				saldo = instanciaLogin.saldo(usuario);
+				
 				menu();
+			}
 
 			//si algún dato es incorrecto debemos restar 1 intento
 			//3 intentos
@@ -61,8 +69,6 @@ public class Banco {
 			System.out.println("3.- Consulta Saldo");
 			System.out.println("4.- Salir");
 			opcion = leer.nextInt();
-			
-			System.out.println("Tu saldo antes de la acción es de: "+saldo);
 			
 			switch (opcion) {
 			
@@ -93,8 +99,6 @@ public class Banco {
 			default:
 				break;
 			}
-			
-			System.out.println("Tu saldo después de la acción es de: "+saldo);
 			
 		}while(continuar);
 	}
