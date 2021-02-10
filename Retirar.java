@@ -20,6 +20,7 @@ public class Retirar {
 		//		2,500	2300
 		saldo = saldo - cantidadARetirar;
 				
+		System.out.println("Tu nuevo saldo es de: "+saldo);
 		//200
 		return saldo;
 	}
